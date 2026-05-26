@@ -15,8 +15,10 @@ export default function Home() {
   const [monthlySavings, setMonthlySavings] = useState(0);
   const [yearlySavings, setYearlySavings] = useState(0);
   const [recommendation, setRecommendation] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
   const [showResult, setShowResult] = useState(false);
-const pricing = {
+  const pricing = {
   ChatGPT: {
     Free: 0,
     Pro: 20,
@@ -100,6 +102,7 @@ const finalRecommendation = recommendationText;
   };
 
 const submitReport = async () => {
+  setLoading(true);
   const { data, error } = await supabase
     .from("audi")
     .insert([
@@ -114,8 +117,13 @@ const submitReport = async () => {
         email,
         company,
         role,
+
       },
     ]);
+    setSuccessMessage("Report submitted successfully!");
+    setLoading(false);
+
+    
 
   console.log(data);
   console.log(error);
@@ -311,8 +319,13 @@ const submitReport = async () => {
         onClick={submitReport}
         className="w-full rounded-xl bg-green-500 py-4 font-semibold text-black hover:bg-green-400 transition"
 >
-       Send Full Report
+       {loading ? "Sending..." : "Send Full Report"}
     </button>
+    {successMessage && (
+  <p className="text-green-400 mt-4 text-center">
+    {successMessage}
+  </p>
+)}
   </div>
 
 </div>
