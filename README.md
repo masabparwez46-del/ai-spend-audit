@@ -82,4 +82,8 @@ Submitted reports are stored in Supabase for lead capture and analysis.
 
 ```bash
 git clone https://github.com/masabparwez46-del/ai-spend-audit.git
+
+## Live Demo
+
+https://ai-spend-audit-wdio-8604jmyw9-masab-s-projects1.vercel.app
 ```
